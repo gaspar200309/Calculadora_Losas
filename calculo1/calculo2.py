@@ -6,7 +6,7 @@ root = tk.Tk()
 root.title("Formulario de Cálculo")
 
 # Ajustar el tamaño de la ventana
-root.geometry("400x300")
+root.geometry("500x250")  # Cambié el tamaño para mejor distribución
 root.config(bg="#f2f2f2")  # Fondo de la ventana en gris claro
 
 # Función para el botón de calcular
@@ -29,7 +29,7 @@ def calcular_action():
 # Estilo para los elementos
 style = ttk.Style()
 style.configure('TLabel', background='#f2f2f2', font=('Helvetica', 12), foreground='#333')
-style.configure('TButton', background='#007acc', foreground='#000000', font=('Helvetica', 12))  # Color de texto blanco
+style.configure('TButton', background='#007acc', foreground='#000000', font=('Helvetica', 12))  # Texto en blanco
 
 # Etiquetas (Labels)
 label_h = ttk.Label(root, text="H")
@@ -47,7 +47,17 @@ button_calcular = ttk.Button(root, text="Calcular", command=calcular_action)
 # Etiqueta para mostrar el resultado de d
 label_resultado = ttk.Label(root, text="", font=('Helvetica', 12, 'bold'), foreground="#007acc")
 
-# Posicionar los elementos en el grid
+# Posicionar los elementos en el grid, centrando todo
+root.grid_columnconfigure(0, weight=1)
+root.grid_columnconfigure(1, weight=1)
+root.grid_columnconfigure(2, weight=1)
+root.grid_rowconfigure(0, weight=1)
+root.grid_rowconfigure(1, weight=1)
+root.grid_rowconfigure(2, weight=1)
+root.grid_rowconfigure(3, weight=1)
+root.grid_rowconfigure(4, weight=1)
+
+# Posicionar las etiquetas y campos de entrada
 label_h.grid(row=0, column=0, padx=10, pady=10, sticky="E")
 entry_h.grid(row=0, column=1, padx=10, pady=10)
 
@@ -57,10 +67,11 @@ entry_asoprincipal.grid(row=1, column=1, padx=10, pady=10)
 label_rec.grid(row=2, column=0, padx=10, pady=10, sticky="E")
 entry_rec.grid(row=2, column=1, padx=10, pady=10)
 
+# Posicionar el botón de calcular
 button_calcular.grid(row=3, column=1, pady=20)
 
-# Posicionar la etiqueta del resultado
-label_resultado.grid(row=4, column=1, padx=10, pady=10)
+# Posicionar la etiqueta del resultado a la derecha
+label_resultado.grid(row=0, column=2, rowspan=4, padx=10, pady=10, sticky="N")
 
 # Iniciar el loop de la ventana
 root.mainloop()
