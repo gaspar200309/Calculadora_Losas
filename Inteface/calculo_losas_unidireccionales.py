@@ -1,4 +1,5 @@
 from tkinter import messagebox
+import tkinter as tk
 
 #ECUACIÓN
 def calcular_d(h, rec, Asøprincipal, entryD):
@@ -27,6 +28,26 @@ def calcular_MuenMn(Mu, res_Mu):
         # resultado_label_MuenMn.config(text=f'MuenMn = {MuenMn:.2f}')
         
         res_Mu.insert(0, f'{MuenMn:.2f}')
+    except ValueError:
+        messagebox.showerror("error", "Por favor, ingrese valores válidos.")
+        
+def calcular_p(fc, fy, Mu, ø, b, d, entry_p):
+    try:
+        fc =float(fc)  
+        fy =float(fy)  
+        Mu =float(Mu)  
+        ø =float(ø)  
+        b =float(d)  
+        d =float(d)  
+    
+        
+        ρ=(0.85*fc/fy)*(1-(1-2*Mu/(ø*0.85*fc*b*d**2))**0.5)
+        
+        messagebox.showinfo("Correcto", f'{ρ:.5f}')
+        
+        entry_p.delete(0, tk.END)
+        entry_p.insert(0, f'{ρ:.5f}')
+        
     except ValueError:
         messagebox.showerror("error", "Por favor, ingrese valores válidos.")
         
