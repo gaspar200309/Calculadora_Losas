@@ -27,7 +27,7 @@ entry_config = {
 
 class principal:
     def __init__(self, top=None):
-        top.geometry("787x624+548+193")
+        top.geometry("787x624+400+150")
         top.minsize(120, 1)
         top.maxsize(1924, 1061)
         top.resizable(1,  1)
@@ -57,12 +57,13 @@ class principal:
         self.TNotebook1.add(self.theEc3, padding=3)
         self.TNotebook1.tab(2, text='''Ecuacion 3''', compound="left",underline='''-1''', )
         self.theEc3.configure(background="#d9d9d9")
+        
+        #Ecuacion 1
 
         self.entryD = tk.Entry(self.theEc1)
         self.entryD.place(relx=0.709, rely=0.223, height=20, relwidth=0.189)
         self.entryD.configure(**entry_config)
         self.entryD.bind("<Key>",bloquear_escritura)
-        #Ecuacion 1
 
         self.entry_rec = tk.Entry(self.theEc1)
         self.entry_rec.place(relx=0.197, rely=0.324, height=20, relwidth=0.189)
@@ -108,6 +109,7 @@ class principal:
         self.Entry1.configure(**entry_config)
         
         #Ecuacion 2 
+        
         self.entry_Mu = tk.Entry(self.theEc2)
         self.entry_Mu.place(relx=0.157, rely=0.206, height=20, relwidth=0.189)
         self.entry_Mu.configure(**entry_config)       
@@ -133,25 +135,246 @@ class principal:
         self.labTitle2 = tk.Label(self.theEc2)
         self.labTitle2.place(relx=0.207, rely=0.037, height=31, width=524)
         self.labTitle2.configure(**title_config,text='''TRANSFORMACION DEL MOMENTO ULTIMO''')
+        
+        
+        
+        #Ecuacion 3
 
         self.labTitle3 = tk.Label(self.theEc3)
-        self.labTitle3.place(relx=0.38, rely=0.056, height=41, width=255)
+        self.labTitle3.place(relx=0.35, rely=0.056, height=41, width=240)
         self.labTitle3.configure(**title_config,text='''Seleccione la ecuacion''')
 
+
+        #Entradas
+        
+        self.labfc = tk.Label(self.theEc3)
+        self.labfc.place(relx=0.03, rely=0.206, height=21, width=25)
+        self.labfc.configure(**label_config,text='''fc''')
+        
+        self.entry_fc = tk.Entry(self.theEc3)
+        self.entry_fc.place(relx=0.07, rely=0.206, height=20, relwidth=0.139)
+        self.entry_fc.configure(**entry_config)  
+        
+        self.labfy = tk.Label(self.theEc3)
+        self.labfy.place(relx=0.230, rely=0.206, height=21, width=25)
+        self.labfy.configure(**label_config,text='''fy''')   
+        
+        self.entry_fy = tk.Entry(self.theEc3)
+        self.entry_fy.place(relx=0.284, rely=0.206, height=20, relwidth=0.139)
+        self.entry_fy.configure(**entry_config)  
+        
+        self.labMu = tk.Label(self.theEc3)
+        self.labMu.place(relx=0.455, rely=0.206, height=21, width=25)
+        self.labMu.configure(**label_config,text='''Mu''')   
+        
+        self.entry_Mu3 = tk.Entry(self.theEc3)
+        self.entry_Mu3.place(relx=0.505, rely=0.206, height=20, relwidth=0.139)
+        self.entry_Mu3.configure(**entry_config)
+        
+        self.labP = tk.Label(self.theEc3)
+        self.labP.place(relx=0.675, rely=0.206, height=21, width=25)
+        self.labP.configure(**label_config,text='''p''')   
+        
+        self.entry_P = tk.Entry(self.theEc3)
+        self.entry_P.place(relx=0.725, rely=0.206, height=20, relwidth=0.139)
+        self.entry_P.configure(**entry_config)
+        
+        #2da  
+        
+        self.labVu = tk.Label(self.theEc3)
+        self.labVu.place(relx=0.03, rely=0.256, height=21, width=25)
+        self.labVu.configure(**label_config,text='''Vu''')   
+        
+        self.entry_Vu = tk.Entry(self.theEc3)
+        self.entry_Vu.place(relx=0.07, rely=0.256, height=20, relwidth=0.139)
+        self.entry_Vu.configure(**entry_config)  
+        
+        self.labλ = tk.Label(self.theEc3)
+        self.labλ.place(relx=0.230, rely=0.256, height=21, width=25)
+        self.labλ.configure(**label_config,text='''λ''')   
+        
+        self.entry_λ = tk.Entry(self.theEc3)
+        self.entry_λ.place(relx=0.284, rely=0.256, height=20, relwidth=0.139)
+        self.entry_λ.configure(**entry_config)   
+        
+        self.labø = tk.Label(self.theEc3)
+        self.labø.place(relx=0.455, rely=0.256, height=21, width=25)
+        self.labø.configure(**label_config,text='''ø''')  
+        
+        self.entry_ø = tk.Entry(self.theEc3)
+        self.entry_ø.place(relx=0.505, rely=0.256, height=20, relwidth=0.139)
+        self.entry_ø.configure(**entry_config)   
+        
+        self.labc = tk.Label(self.theEc3)
+        self.labc.place(relx=0.675, rely=0.256, height=21, width=25)
+        self.labc.configure(**label_config,text='''c''')  
+        
+        self.entry_c = tk.Entry(self.theEc3)
+        self.entry_c.place(relx=0.725, rely=0.256, height=20, relwidth=0.139)
+        self.entry_c.configure(**entry_config)   
+        
+        #3ra
+        
+        self.labb = tk.Label(self.theEc3)
+        self.labb.place(relx=0.03, rely=0.306, height=21, width=25)
+        self.labb.configure(**label_config,text='''b''')   
+        
+        self.entry_b3 = tk.Entry(self.theEc3)
+        self.entry_b3.place(relx=0.07, rely=0.306, height=20, relwidth=0.139)
+        self.entry_b3.configure(**entry_config)  
+        
+        self.labd3 = tk.Label(self.theEc3)
+        self.labd3.place(relx=0.230, rely=0.306, height=21, width=25)
+        self.labd3.configure(**label_config,text='''d''')   
+        
+        self.entry_d3 = tk.Entry(self.theEc3)
+        self.entry_d3.place(relx=0.284, rely=0.306, height=20, relwidth=0.139)
+        self.entry_d3.configure(**entry_config)   
+        
+        self.labB1 = tk.Label(self.theEc3)
+        self.labB1.place(relx=0.455, rely=0.306, height=21, width=25)
+        self.labB1.configure(**label_config,text='''B1''')  
+        
+        self.entry_B1 = tk.Entry(self.theEc3)
+        self.entry_B1.place(relx=0.505, rely=0.306, height=20, relwidth=0.139)
+        self.entry_B1.configure(**entry_config)   
+        
+        self.labpmin = tk.Label(self.theEc3)
+        self.labpmin.place(relx=0.675, rely=0.306, height=21, width=35)
+        self.labpmin.configure(**label_config,text='''pmin''')  
+        
+        self.entry_pmin = tk.Entry(self.theEc3)
+        self.entry_pmin.place(relx=0.725, rely=0.306, height=20, relwidth=0.139)
+        self.entry_pmin.configure(**entry_config)
+        
+        #4to
+        self.laba = tk.Label(self.theEc3)
+        self.laba.place(relx=0.03, rely=0.356, height=21, width=25)
+        self.laba.configure(**label_config,text='''a''')  
+        
+        self.entry_a = tk.Entry(self.theEc3)
+        self.entry_a.place(relx=0.07, rely=0.356, height=20, relwidth=0.139)
+        self.entry_a.configure(**entry_config)
+
+
         self.optn1 = tk.Button(self.theEc3)
-        self.optn1.place(relx=0.354, rely=0.206, height=46, width=237)
+        self.optn1.place(relx=0.03, rely=0.437, height=46, width=237)
         self.optn1.configure(background="#fffee1")
         self.optn1.configure(foreground="#000000")
-        self.optn1.configure(text='''Ecuacion 1''')
-        #Pendiente a analizar
+        self.optn1.configure(text='''Porcentaje de acero requerido''')
+        self.optn1.configure(command=lambda: calcular_p(self.entry_fc.get(), self.entry_fy.get(), self.entry_Mu3.get(), self.entry_ø.get(), self.entry_b3.get(), self.entry_d3.get(),self.entry_P))
+        
         self.optn2 = tk.Button(self.theEc3)
-        self.optn2.place(relx=0.354, rely=0.337, height=46, width=237)
+        self.optn2.place(relx=0.03, rely=0.537, height=46, width=237)
         self.optn2.configure(activebackground="#d9d9d9")
         self.optn2.configure(activeforeground="black")
         self.optn2.configure(background="#fffee1")
         self.optn2.configure(disabledforeground="#a3a3a3")
         self.optn2.configure(font="-family {Segoe UI} -size 9")
-        self.optn2.configure(text='''Ecuacion 2''')
+        self.optn2.configure(text='''Verificacion viga T''')
+        self.optn2.configure(command= lambda: verificar_vigaT(self.entry_P.get(), self.entry_fy.get(), self.entry_d3.get(), self.entry_fc.get(), self.entry_a))
+        
+        self.optn3 = tk.Button(self.theEc3)
+        self.optn3.place(relx=0.03, rely=0.637, height=46, width=237)
+        self.optn3.configure(activebackground="#d9d9d9")
+        self.optn3.configure(activeforeground="black")
+        self.optn3.configure(background="#fffee1")
+        self.optn3.configure(disabledforeground="#a3a3a3")
+        self.optn3.configure(font="-family {Segoe UI} -size 9")
+        self.optn3.configure(text='''β1 para distribucion de esfuerzo''')
+        self.optn3.configure(command=lambda: calcular_B1(self.entry_fc.get()))
+        
+        
+        self.optn4 = tk.Button(self.theEc3)
+        self.optn4.place(relx=0.03, rely=0.737, height=46, width=237)
+        self.optn4.configure(activebackground="#d9d9d9")
+        self.optn4.configure(activeforeground="black")
+        self.optn4.configure(background="#fffee1")
+        self.optn4.configure(disabledforeground="#a3a3a3")
+        self.optn4.configure(font="-family {Segoe UI} -size 9")
+        self.optn4.configure(text='''Distancia al eje neutro''')
+        self.optn4.configure(command=lambda: calcular_c(self.entry_a.get(), self.entry_B1.get(), self.entry_c))
+        
+        self.optn5 = tk.Button(self.theEc3)
+        self.optn5.place(relx=0.03, rely=0.837, height=46, width=237)
+        self.optn5.configure(activebackground="#d9d9d9")
+        self.optn5.configure(activeforeground="black")
+        self.optn5.configure(background="#fffee1")
+        self.optn5.configure(disabledforeground="#a3a3a3")
+        self.optn5.configure(font="-family {Segoe UI} -size 9")
+        self.optn5.configure(text='''Et a traves de la relacion de triangulos''')
+        self.optn5.configure(command=lambda: calcular_Et(self.entry_d3.get(), self.entry_c.get()))
+        
+        self.optn6 = tk.Button(self.theEc3)
+        self.optn6.place(relx=0.354, rely=0.437, height=46, width=237)
+        self.optn6.configure(activebackground="#d9d9d9")
+        self.optn6.configure(activeforeground="black")
+        self.optn6.configure(background="#fffee1")
+        self.optn6.configure(disabledforeground="#a3a3a3")
+        self.optn6.configure(font="-family {Segoe UI} -size 9")
+        self.optn6.configure(text='''Area requerida de acero''')
+        self.optn6.configure(command=lambda: calcular_As(self.entry_P.get(), self.entry_b3.get(), self.entry_d3.get()))
+        
+        self.optn7 = tk.Button(self.theEc3)
+        self.optn7.place(relx=0.354, rely=0.537, height=46, width=237)
+        self.optn7.configure(activebackground="#d9d9d9")
+        self.optn7.configure(activeforeground="black")
+        self.optn7.configure(background="#fffee1")
+        self.optn7.configure(disabledforeground="#a3a3a3")
+        self.optn7.configure(font="-family {Segoe UI} -size 9")
+        self.optn7.configure(text='''Refuerzo minimo''')
+        self.optn7.configure(command=lambda: calcular_ρmin(self.entry_fy.get(), self.entry_pmin))
+        
+        self.optn8 = tk.Button(self.theEc3)
+        self.optn8.place(relx=0.354, rely=0.637, height=46, width=237)
+        self.optn8.configure(activebackground="#d9d9d9")
+        self.optn8.configure(activeforeground="black")
+        self.optn8.configure(background="#fffee1")
+        self.optn8.configure(disabledforeground="#a3a3a3")
+        self.optn8.configure(font="-family {Segoe UI} -size 9")
+        self.optn8.configure(text='''Numero de barras''')
+        self.optn8.configure(command=lambda: calcular_Nb(self.entry_pmin.get()))
+        
+        
+        self.optn9 = tk.Button(self.theEc3)
+        self.optn9.place(relx=0.354, rely=0.737, height=46, width=237)
+        self.optn9.configure(activebackground="#d9d9d9")
+        self.optn9.configure(activeforeground="black")
+        self.optn9.configure(background="#fffee1")
+        self.optn9.configure(disabledforeground="#a3a3a3")
+        self.optn9.configure(font="-family {Segoe UI} -size 9")
+        self.optn9.configure(text='''Refuerzo corrugado''')
+        self.optn9.configure(command=lambda: calcular_ρmintemp(self.entry_fy.get(), self.entry_d3.get()))
+        
+        self.optn10 = tk.Button(self.theEc3)
+        self.optn10.place(relx=0.354, rely=0.837, height=46, width=237)
+        self.optn10.configure(activebackground="#d9d9d9")
+        self.optn10.configure(activeforeground="black")
+        self.optn10.configure(background="#fffee1")
+        self.optn10.configure(disabledforeground="#a3a3a3")
+        self.optn10.configure(font="-family {Segoe UI} -size 9")
+        self.optn10.configure(text='''Momento nominal''')
+        self.optn10.configure(command= lambda: calcular_øMn(self.entry_ø.get(),self.entry_pmin.get(), self.entry_d3.get(), self.entry_fy.get(), self.entry_Mu3))
+        
+        self.optn11 = tk.Button(self.theEc3)
+        self.optn11.place(relx=0.675, rely=0.437, height=46, width=237)
+        self.optn11.configure(activebackground="#d9d9d9")
+        self.optn11.configure(activeforeground="black")
+        self.optn11.configure(background="#fffee1")
+        self.optn11.configure(disabledforeground="#a3a3a3")
+        self.optn11.configure(font="-family {Segoe UI} -size 9")
+        self.optn11.configure(text='''Verificacion al cortante''')
+        self.optn11.configure(command=lambda: calcular_cortante(self.entry_ø.get(), self.entry_λ.get(), self.entry_b3.get(), self.entry_d3.get(), self.entry_Vu.get(), self.entry_fc.get()))
+
+        
+        self.optn12 = tk.Button(self.theEc3)
+        self.optn12.place(relx=0.675, rely=0.537, height=46, width=237)
+        self.optn12.configure(activebackground="#d9d9d9")
+        self.optn12.configure(activeforeground="black")
+        self.optn12.configure(background="#fffee1")
+        self.optn12.configure(disabledforeground="#a3a3a3")
+        self.optn12.configure(font="-family {Segoe UI} -size 9")
+        self.optn12.configure(text='''Calcular todo''')
 
 def main(*args):
     global root
