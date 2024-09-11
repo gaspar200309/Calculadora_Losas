@@ -247,7 +247,14 @@ class principal:
         self.entry_pmin.place(relx=0.725, rely=0.306, height=20, relwidth=0.139)
         self.entry_pmin.configure(**entry_config)
         
+        #4to
+        self.laba = tk.Label(self.theEc3)
+        self.laba.place(relx=0.03, rely=0.356, height=21, width=25)
+        self.laba.configure(**label_config,text='''a''')  
         
+        self.entry_a = tk.Entry(self.theEc3)
+        self.entry_a.place(relx=0.07, rely=0.356, height=20, relwidth=0.139)
+        self.entry_a.configure(**entry_config)
 
 
         self.optn1 = tk.Button(self.theEc3)
@@ -265,6 +272,7 @@ class principal:
         self.optn2.configure(disabledforeground="#a3a3a3")
         self.optn2.configure(font="-family {Segoe UI} -size 9")
         self.optn2.configure(text='''Verificacion viga T''')
+        self.optn2.configure(command= lambda: verificar_vigaT(self.entry_P.get(), self.entry_fy.get(), self.entry_d3.get(), self.entry_fc.get(), self.entry_a))
         
         self.optn3 = tk.Button(self.theEc3)
         self.optn3.place(relx=0.03, rely=0.637, height=46, width=237)
@@ -274,6 +282,8 @@ class principal:
         self.optn3.configure(disabledforeground="#a3a3a3")
         self.optn3.configure(font="-family {Segoe UI} -size 9")
         self.optn3.configure(text='''β1 para distribucion de esfuerzo''')
+        self.optn3.configure(command=lambda: calcular_B1(self.entry_fc.get()))
+        
         
         self.optn4 = tk.Button(self.theEc3)
         self.optn4.place(relx=0.03, rely=0.737, height=46, width=237)
@@ -283,6 +293,7 @@ class principal:
         self.optn4.configure(disabledforeground="#a3a3a3")
         self.optn4.configure(font="-family {Segoe UI} -size 9")
         self.optn4.configure(text='''Distancia al eje neutro''')
+        self.optn4.configure(command=lambda: calcular_c(self.entry_a.get(), self.entry_B1.get(), self.entry_c))
         
         self.optn5 = tk.Button(self.theEc3)
         self.optn5.place(relx=0.03, rely=0.837, height=46, width=237)
@@ -292,6 +303,7 @@ class principal:
         self.optn5.configure(disabledforeground="#a3a3a3")
         self.optn5.configure(font="-family {Segoe UI} -size 9")
         self.optn5.configure(text='''Et a traves de la relacion de triangulos''')
+        self.optn5.configure(command=lambda: calcular_Et(self.entry_d3.get(), self.entry_c.get()))
         
         self.optn6 = tk.Button(self.theEc3)
         self.optn6.place(relx=0.354, rely=0.437, height=46, width=237)
@@ -301,6 +313,7 @@ class principal:
         self.optn6.configure(disabledforeground="#a3a3a3")
         self.optn6.configure(font="-family {Segoe UI} -size 9")
         self.optn6.configure(text='''Area requerida de acero''')
+        self.optn6.configure(command=lambda: calcular_As(self.entry_P.get(), self.entry_b3.get(), self.entry_d3.get()))
         
         self.optn7 = tk.Button(self.theEc3)
         self.optn7.place(relx=0.354, rely=0.537, height=46, width=237)
@@ -310,6 +323,7 @@ class principal:
         self.optn7.configure(disabledforeground="#a3a3a3")
         self.optn7.configure(font="-family {Segoe UI} -size 9")
         self.optn7.configure(text='''Refuerzo minimo''')
+        self.optn7.configure(command=lambda: calcular_ρmin(self.entry_fy.get(), self.entry_pmin))
         
         self.optn8 = tk.Button(self.theEc3)
         self.optn8.place(relx=0.354, rely=0.637, height=46, width=237)
@@ -319,6 +333,8 @@ class principal:
         self.optn8.configure(disabledforeground="#a3a3a3")
         self.optn8.configure(font="-family {Segoe UI} -size 9")
         self.optn8.configure(text='''Numero de barras''')
+        self.optn8.configure(command=lambda: calcular_Nb(self.entry_pmin.get()))
+        
         
         self.optn9 = tk.Button(self.theEc3)
         self.optn9.place(relx=0.354, rely=0.737, height=46, width=237)
@@ -328,6 +344,7 @@ class principal:
         self.optn9.configure(disabledforeground="#a3a3a3")
         self.optn9.configure(font="-family {Segoe UI} -size 9")
         self.optn9.configure(text='''Refuerzo corrugado''')
+        self.optn9.configure(command=lambda: calcular_ρmintemp(self.entry_fy.get(), self.entry_d3.get()))
         
         self.optn10 = tk.Button(self.theEc3)
         self.optn10.place(relx=0.354, rely=0.837, height=46, width=237)
@@ -337,6 +354,7 @@ class principal:
         self.optn10.configure(disabledforeground="#a3a3a3")
         self.optn10.configure(font="-family {Segoe UI} -size 9")
         self.optn10.configure(text='''Momento nominal''')
+        self.optn10.configure(command= lambda: calcular_øMn(self.entry_ø.get(),self.entry_pmin.get(), self.entry_d3.get(), self.entry_fy.get(), self.entry_Mu3))
         
         self.optn11 = tk.Button(self.theEc3)
         self.optn11.place(relx=0.675, rely=0.437, height=46, width=237)
@@ -346,6 +364,7 @@ class principal:
         self.optn11.configure(disabledforeground="#a3a3a3")
         self.optn11.configure(font="-family {Segoe UI} -size 9")
         self.optn11.configure(text='''Verificacion al cortante''')
+        self.optn11.configure(command=lambda: calcular_cortante(self.entry_ø.get(), self.entry_λ.get(), self.entry_b3.get(), self.entry_d3.get(), self.entry_Vu.get(), self.entry_fc.get()))
 
         
         self.optn12 = tk.Button(self.theEc3)
