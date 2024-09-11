@@ -5,9 +5,8 @@ from tkinter import ttk
 root = tk.Tk()
 root.title("Formulario de Cálculo")
 
-# Ajustar el tamaño de la ventana
 root.geometry("400x300")
-root.config(bg="#f2f2f2")  # Fondo de la ventana en gris claro
+root.config(bg="#f2f2f2")  
 
 # Función para el botón de calcular
 def calcular_action():
