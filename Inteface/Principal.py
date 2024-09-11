@@ -31,7 +31,7 @@ class principal:
         top.minsize(120, 1)
         top.maxsize(1924, 1061)
         top.resizable(1,  1)
-        top.title("Toplevel 0")
+        top.title("Calculadora de Losas")
         top.configure(background="#f9f6f2")
         self.top = top
 
