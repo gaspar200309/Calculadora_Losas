@@ -27,7 +27,7 @@ entry_config = {
 
 class principal:
     def __init__(self, top=None):
-        top.geometry("787x624+400+150")
+        top.geometry("787x700+400+150")
         top.minsize(120, 1)
         top.maxsize(1924, 1061)
         top.resizable(1,  1)
@@ -257,64 +257,96 @@ class principal:
         self.entry_a.configure(**entry_config)
 
 
-        #Boton de realizar calculos
-        
         # self.optn12 = tk.Button(self.theEc3)
         # self.optn12.place(relx=0.675, rely=0.537, height=46, width=237)
-        # self.optn12.configure(activebackground="#d9d9d9")
-        # self.optn12.configure(activeforeground="black")
-        # self.optn12.configure(background="#fffee1")
-        # self.optn12.configure(disabledforeground="#a3a3a3")
-        # self.optn12.configure(font="-family {Segoe UI} -size 9")
-        # self.optn12.configure(text='''Calcular todo''')
-        self.optn12 = tk.Button(self.theEc3)
-        self.optn12.place(relx=0.675, rely=0.537, height=46, width=237)
-        self.optn12.configure(background="#fefda6", text="Calcular Acero")
-        self.optn12.configure(command=self.mostrar_calculo_acero)
+        # self.optn12.configure(background="#fefda6", text="Calcular Acero")
+        # self.optn12.configure(command=self.mostrar_calculo_acero)
 
-        # Etiqueta o campo para mostrar el resultado del cálculo
-        self.resultado_acero = tk.Label(self.theEc3)
-        self.resultado_acero.place(relx=0.675, rely=0.637, height=200, width=237)
-        self.resultado_acero.configure(background="#f9f6f2", font=("Comic Sans MS", 12), text="Resultado: ")
+        # # Etiqueta o campo para mostrar el resultado del cálculo
+        # self.resultado_acero = tk.Label(self.theEc3)
+        # self.resultado_acero.place(relx=0.675, rely=0.637, height=300, width=300)
+        # self.resultado_acero.configure(background="#f9f6f2",anchor='center', font=("Comic Sans MS", 12), text="Resultado: ")
+
+        self.calculate_button3 = tk.Button(self.theEc3, text='Calcular Acero', command=self.mostrar_calculo_acero, background="#fefda6")
+        self.calculate_button3.place(relx=0.675, rely=0.537, height=46, width=237)
+        
+        self.resultado_acero = tk.Label(self.theEc3, text="Resultado: ", **label_config)
+        self.resultado_acero.place(relx=0.073, rely=0.49, height=300, width=400)
+        
+        # self.title_label3 = tk.Label(self.theEc3, text='REQUIERIMIENTO DE ACERO', **title_config)
+        # self.title_label3.place(relx=0.207, rely=0.037, height=31, width=424)
 
     #calculos_acero(fc, fy, Mu, ø, b, d, Vu, λ):
     def mostrar_calculo_acero(self):
         try:
             # Extrayendo los valores de las entradas
-            D = float(self.entryD.get())
             rec = float(self.entry_rec.get())
             h = float(self.entry_h.get())
-            Asøprincipal = float(self.entry_Asøprincipal.get())
             Mu = float(self.entry_Mu3.get())
             fc = float(self.entry_fc.get())
             fy = float(self.entry_fy.get())
-            p = float(self.entry_P.get())
+            ρ = float(self.entry_P.get())
             Vu = float(self.entry_Vu.get())
             λ = float(self.entry_λ.get())
             ø = float(self.entry_ø.get())
-            c = float(self.entry_c.get())
             b = float(self.entry_b3.get())
             d = float(self.entry_d3.get())
-            B1 = float(self.entry_B1.get())
-            pmin = float(self.entry_pmin.get())
             a = float(self.entry_a.get())
 
-            # Aquí irían los cálculos necesarios, por ejemplo:
-            # Cálculo de la altura útil 'd':
-            altura_util = h - rec
+            # Cálculo de β1
+            if fc < 28:
+                β1 = 0.85
+            elif fc < 55:
+                β1 = 0.65
+            else:
+                β1 = 0.85 - (0.05 * (fc - 28) / 7)
+            
+            # Cálculo de la distancia al eje neutro 'c'
+            c = a / β1
 
-            # Cálculo del momento resistente:
-            momento_resistente = (Mu * ø) / (fc * b * d)
+            # Cálculo de єt
+            єt = d - (c * 0.003 / c)
 
-            # Cálculo del área de acero requerida:
-            area_acero = (Mu / (fy * d))
+            # Cálculo del área de acero requerida 'As'
+            As = ρ * (b * 100) * (d * 100)  # La expresión está en cm
+
+            # Refuerzo mínimo a flexión
+            ρmin_a = (0.0018 * 420 / fy) * 0.045
+            ρmin_b = 0.0014 * 0.045
+            ρmin = max(ρmin_a, ρmin_b)
+
+            # Número de barras
+            Nb = ρmin / 1.13
+
+            # Refuerzo corrugado de retracción y temperatura
+            ρmintemp_a = (0.0018 * 420 / fy) * 1 * d
+            ρmintemp_b = 1.4 * 1 * d
+            ρmintemp = max(ρmintemp_a, ρmintemp_b)
+
+            # Momento nominal
+            øMn = ø * ρmin * fy * (d - (a / 2)) * (1000 / 1)  # Conversión a Kn.m
+
+            # Verificación del momento
+            momento_verificacion = "CUMPLE" if øMn > Mu else "NO CUMPLE"
+
+            # Verificación al cortante
+            cortante_verificacion = "cortante no requiere estribos" if 0.5 * ø * 0.17 * λ * (fc**0.5) * 100 * b * d > Vu else "cortante requiere estribos"
+
+            # Resultados para mostrar
+            resultado_texto = (
+                f"β1: {β1:.2f}\n"
+                f"c: {c:.2f}\n"
+                f"єt: {єt:.2f}\n"
+                f"As: {As:.2f}\n"
+                f"ρmin: {ρmin:.4f}\n"
+                f"Nb: {Nb:.2f}\n"
+                f"ρmintemp: {ρmintemp:.4f}\n"
+                f"øMn: {øMn:.2f} Kn.m\n"
+                f"Verificación del momento: {momento_verificacion}\n"
+                f"Verificación al cortante: {cortante_verificacion}"
+            )
 
             # Mostrar los resultados en la interfaz o en una etiqueta
-            resultado_texto = f"Altura útil: {altura_util:.2f}\n"
-            resultado_texto += f"Momento resistente: {momento_resistente:.2f}\n"
-            resultado_texto += f"Área de acero requerida: {area_acero:.2f}"
-
-            # Supongamos que tienes una etiqueta para mostrar los resultados
             self.resultado_acero.configure(text=resultado_texto)
 
         except ValueError:
