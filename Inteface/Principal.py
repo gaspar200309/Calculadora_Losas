@@ -27,7 +27,7 @@ entry_config = {
 
 class principal:
     def __init__(self, top=None):
-        top.geometry("787x624+548+193")
+        top.geometry("787x700+400+150")
         top.minsize(120, 1)
         top.maxsize(1924, 1061)
         top.resizable(1,  1)
@@ -57,12 +57,13 @@ class principal:
         self.TNotebook1.add(self.theEc3, padding=3)
         self.TNotebook1.tab(2, text='''Ecuacion 3''', compound="left",underline='''-1''', )
         self.theEc3.configure(background="#d9d9d9")
+        
+        #Ecuacion 1
 
         self.entryD = tk.Entry(self.theEc1)
         self.entryD.place(relx=0.709, rely=0.223, height=20, relwidth=0.189)
         self.entryD.configure(**entry_config)
         self.entryD.bind("<Key>",bloquear_escritura)
-        #Ecuacion 1
 
         self.entry_rec = tk.Entry(self.theEc1)
         self.entry_rec.place(relx=0.197, rely=0.324, height=20, relwidth=0.189)
@@ -108,6 +109,7 @@ class principal:
         self.Entry1.configure(**entry_config)
         
         #Ecuacion 2 
+        
         self.entry_Mu = tk.Entry(self.theEc2)
         self.entry_Mu.place(relx=0.157, rely=0.206, height=20, relwidth=0.189)
         self.entry_Mu.configure(**entry_config)       
@@ -133,34 +135,231 @@ class principal:
         self.labTitle2 = tk.Label(self.theEc2)
         self.labTitle2.place(relx=0.207, rely=0.037, height=31, width=524)
         self.labTitle2.configure(**title_config,text='''TRANSFORMACION DEL MOMENTO ULTIMO''')
+        
+        
+        
+        #Ecuacion 3
 
         self.labTitle3 = tk.Label(self.theEc3)
-        self.labTitle3.place(relx=0.38, rely=0.056, height=41, width=255)
+        self.labTitle3.place(relx=0.35, rely=0.056, height=41, width=240)
         self.labTitle3.configure(**title_config,text='''Seleccione la ecuacion''')
 
-        self.optn1 = tk.Button(self.theEc3)
-        self.optn1.place(relx=0.354, rely=0.206, height=46, width=237)
-        self.optn1.configure(background="#fffee1")
-        self.optn1.configure(foreground="#000000")
-        self.optn1.configure(text='''Ecuacion 1''')
-        #Pendiente a analizar
-        self.optn2 = tk.Button(self.theEc3)
-        self.optn2.place(relx=0.354, rely=0.337, height=46, width=237)
-        self.optn2.configure(activebackground="#d9d9d9")
-        self.optn2.configure(activeforeground="black")
-        self.optn2.configure(background="#fffee1")
-        self.optn2.configure(disabledforeground="#a3a3a3")
-        self.optn2.configure(font="-family {Segoe UI} -size 9")
-        self.optn2.configure(text='''Ecuacion 2''')
+
+        #Entradas
+        
+        self.labfc = tk.Label(self.theEc3)
+        self.labfc.place(relx=0.03, rely=0.206, height=21, width=25)
+        self.labfc.configure(**label_config,text='''fc''')
+        
+        self.entry_fc = tk.Entry(self.theEc3)
+        self.entry_fc.place(relx=0.07, rely=0.206, height=20, relwidth=0.139)
+        self.entry_fc.configure(**entry_config)  
+        
+        self.labfy = tk.Label(self.theEc3)
+        self.labfy.place(relx=0.230, rely=0.206, height=21, width=25)
+        self.labfy.configure(**label_config,text='''fy''')   
+        
+        self.entry_fy = tk.Entry(self.theEc3)
+        self.entry_fy.place(relx=0.284, rely=0.206, height=20, relwidth=0.139)
+        self.entry_fy.configure(**entry_config)  
+        
+        self.labMu = tk.Label(self.theEc3)
+        self.labMu.place(relx=0.455, rely=0.206, height=21, width=25)
+        self.labMu.configure(**label_config,text='''Mu''')   
+        
+        self.entry_Mu3 = tk.Entry(self.theEc3)
+        self.entry_Mu3.place(relx=0.505, rely=0.206, height=20, relwidth=0.139)
+        self.entry_Mu3.configure(**entry_config)
+        
+        self.labP = tk.Label(self.theEc3)
+        self.labP.place(relx=0.675, rely=0.206, height=21, width=25)
+        self.labP.configure(**label_config,text='''p''')   
+        
+        self.entry_P = tk.Entry(self.theEc3)
+        self.entry_P.place(relx=0.725, rely=0.206, height=20, relwidth=0.139)
+        self.entry_P.configure(**entry_config)
+        
+        #2da  
+        
+        self.labVu = tk.Label(self.theEc3)
+        self.labVu.place(relx=0.03, rely=0.256, height=21, width=25)
+        self.labVu.configure(**label_config,text='''Vu''')   
+        
+        self.entry_Vu = tk.Entry(self.theEc3)
+        self.entry_Vu.place(relx=0.07, rely=0.256, height=20, relwidth=0.139)
+        self.entry_Vu.configure(**entry_config)  
+        
+        self.labλ = tk.Label(self.theEc3)
+        self.labλ.place(relx=0.230, rely=0.256, height=21, width=25)
+        self.labλ.configure(**label_config,text='''λ''')   
+        
+        self.entry_λ = tk.Entry(self.theEc3)
+        self.entry_λ.place(relx=0.284, rely=0.256, height=20, relwidth=0.139)
+        self.entry_λ.configure(**entry_config)   
+        
+        self.labø = tk.Label(self.theEc3)
+        self.labø.place(relx=0.455, rely=0.256, height=21, width=25)
+        self.labø.configure(**label_config,text='''ø''')  
+        
+        self.entry_ø = tk.Entry(self.theEc3)
+        self.entry_ø.place(relx=0.505, rely=0.256, height=20, relwidth=0.139)
+        self.entry_ø.configure(**entry_config)   
+        
+        self.labc = tk.Label(self.theEc3)
+        self.labc.place(relx=0.675, rely=0.256, height=21, width=25)
+        self.labc.configure(**label_config,text='''c''')  
+        
+        self.entry_c = tk.Entry(self.theEc3)
+        self.entry_c.place(relx=0.725, rely=0.256, height=20, relwidth=0.139)
+        self.entry_c.configure(**entry_config)   
+        
+        #3ra
+        
+        self.labb = tk.Label(self.theEc3)
+        self.labb.place(relx=0.03, rely=0.306, height=21, width=25)
+        self.labb.configure(**label_config,text='''b''')   
+        
+        self.entry_b3 = tk.Entry(self.theEc3)
+        self.entry_b3.place(relx=0.07, rely=0.306, height=20, relwidth=0.139)
+        self.entry_b3.configure(**entry_config)  
+        
+        self.labd3 = tk.Label(self.theEc3)
+        self.labd3.place(relx=0.230, rely=0.306, height=21, width=25)
+        self.labd3.configure(**label_config,text='''d''')   
+        
+        self.entry_d3 = tk.Entry(self.theEc3)
+        self.entry_d3.place(relx=0.284, rely=0.306, height=20, relwidth=0.139)
+        self.entry_d3.configure(**entry_config)   
+        
+        self.labB1 = tk.Label(self.theEc3)
+        self.labB1.place(relx=0.455, rely=0.306, height=21, width=25)
+        self.labB1.configure(**label_config,text='''B1''')  
+        
+        self.entry_B1 = tk.Entry(self.theEc3)
+        self.entry_B1.place(relx=0.505, rely=0.306, height=20, relwidth=0.139)
+        self.entry_B1.configure(**entry_config)   
+        
+        self.labpmin = tk.Label(self.theEc3)
+        self.labpmin.place(relx=0.675, rely=0.306, height=21, width=35)
+        self.labpmin.configure(**label_config,text='''pmin''')  
+        
+        self.entry_pmin = tk.Entry(self.theEc3)
+        self.entry_pmin.place(relx=0.725, rely=0.306, height=20, relwidth=0.139)
+        self.entry_pmin.configure(**entry_config)
+        
+        #4to
+        self.laba = tk.Label(self.theEc3)
+        self.laba.place(relx=0.03, rely=0.356, height=21, width=25)
+        self.laba.configure(**label_config,text='''a''')  
+        
+        self.entry_a = tk.Entry(self.theEc3)
+        self.entry_a.place(relx=0.07, rely=0.356, height=20, relwidth=0.139)
+        self.entry_a.configure(**entry_config)
+
+
+        # self.optn12 = tk.Button(self.theEc3)
+        # self.optn12.place(relx=0.675, rely=0.537, height=46, width=237)
+        # self.optn12.configure(background="#fefda6", text="Calcular Acero")
+        # self.optn12.configure(command=self.mostrar_calculo_acero)
+
+        # # Etiqueta o campo para mostrar el resultado del cálculo
+        # self.resultado_acero = tk.Label(self.theEc3)
+        # self.resultado_acero.place(relx=0.675, rely=0.637, height=300, width=300)
+        # self.resultado_acero.configure(background="#f9f6f2",anchor='center', font=("Comic Sans MS", 12), text="Resultado: ")
+
+        self.calculate_button3 = tk.Button(self.theEc3, text='Calcular Acero', command=self.mostrar_calculo_acero, background="#fefda6")
+        self.calculate_button3.place(relx=0.675, rely=0.537, height=46, width=237)
+        
+        self.resultado_acero = tk.Label(self.theEc3, text="Resultado: ", **label_config)
+        self.resultado_acero.place(relx=0.073, rely=0.49, height=300, width=400)
+        
+        # self.title_label3 = tk.Label(self.theEc3, text='REQUIERIMIENTO DE ACERO', **title_config)
+        # self.title_label3.place(relx=0.207, rely=0.037, height=31, width=424)
+
+    #calculos_acero(fc, fy, Mu, ø, b, d, Vu, λ):
+    def mostrar_calculo_acero(self):
+        try:
+            # Extrayendo los valores de las entradas
+            rec = float(self.entry_rec.get())
+            h = float(self.entry_h.get())
+            Mu = float(self.entry_Mu3.get())
+            fc = float(self.entry_fc.get())
+            fy = float(self.entry_fy.get())
+            ρ = float(self.entry_P.get())
+            Vu = float(self.entry_Vu.get())
+            λ = float(self.entry_λ.get())
+            ø = float(self.entry_ø.get())
+            b = float(self.entry_b3.get())
+            d = float(self.entry_d3.get())
+            a = float(self.entry_a.get())
+
+            # Cálculo de β1
+            if fc < 28:
+                β1 = 0.85
+            elif fc < 55:
+                β1 = 0.65
+            else:
+                β1 = 0.85 - (0.05 * (fc - 28) / 7)
+            
+            # Cálculo de la distancia al eje neutro 'c'
+            c = a / β1
+
+            # Cálculo de єt
+            єt = d - (c * 0.003 / c)
+
+            # Cálculo del área de acero requerida 'As'
+            As = ρ * (b * 100) * (d * 100)  # La expresión está en cm
+
+            # Refuerzo mínimo a flexión
+            ρmin_a = (0.0018 * 420 / fy) * 0.045
+            ρmin_b = 0.0014 * 0.045
+            ρmin = max(ρmin_a, ρmin_b)
+
+            # Número de barras
+            Nb = ρmin / 1.13
+
+            # Refuerzo corrugado de retracción y temperatura
+            ρmintemp_a = (0.0018 * 420 / fy) * 1 * d
+            ρmintemp_b = 1.4 * 1 * d
+            ρmintemp = max(ρmintemp_a, ρmintemp_b)
+
+            # Momento nominal
+            øMn = ø * ρmin * fy * (d - (a / 2)) * (1000 / 1)  # Conversión a Kn.m
+
+            # Verificación del momento
+            momento_verificacion = "CUMPLE" if øMn > Mu else "NO CUMPLE"
+
+            # Verificación al cortante
+            cortante_verificacion = "cortante no requiere estribos" if 0.5 * ø * 0.17 * λ * (fc**0.5) * 100 * b * d > Vu else "cortante requiere estribos"
+
+            # Resultados para mostrar
+            resultado_texto = (
+                f"β1: {β1:.2f}\n"
+                f"c: {c:.2f}\n"
+                f"єt: {єt:.2f}\n"
+                f"As: {As:.2f}\n"
+                f"ρmin: {ρmin:.4f}\n"
+                f"Nb: {Nb:.2f}\n"
+                f"ρmintemp: {ρmintemp:.4f}\n"
+                f"øMn: {øMn:.2f} Kn.m\n"
+                f"Verificación del momento: {momento_verificacion}\n"
+                f"Verificación al cortante: {cortante_verificacion}"
+            )
+
+            # Mostrar los resultados en la interfaz o en una etiqueta
+            self.resultado_acero.configure(text=resultado_texto)
+
+        except ValueError:
+            self.resultado_acero.configure(text="Error: Asegúrate de ingresar valores numéricos válidos.")
+
 
 def main(*args):
     global root
     root = tk.Tk()
     root.protocol('WM_DELETE_WINDOW', root.destroy)
-    # Creamos un widget global
     global _top1, _w1
     _top1 = root
-    _w1 = principal(_top1)# Llamamos a la funcion pa configurar la ventana
+    _w1 = principal(_top1)
     root.mainloop()
 
 if __name__ == '__main__':
