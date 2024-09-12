@@ -58,6 +58,12 @@ class principal:
         self.TNotebook1.tab(2, text='''Ecuacion 3''', compound="left",underline='''-1''', )
         self.theEc3.configure(background="#d9d9d9")
         
+        self.label_resultado_1 = tk.Label(self.theEc3, text="Resultado Cálculo 1: ", **label_config)
+        self.label_resultado_1.place(relx=0.03, rely=0.6, height=21, width=250)
+
+        self.label_resultado_2 = tk.Label(self.theEc3, text="Resultado Cálculo 2: ", **label_config)
+        self.label_resultado_2.place(relx=0.03, rely=0.65, height=21, width=250)
+
         #Ecuacion 1
 
         self.entryD = tk.Entry(self.theEc1)
@@ -94,9 +100,11 @@ class principal:
         
         self.btnCalcular = tk.Button(self.theEc1)
         self.btnCalcular.place(relx=0.472, rely=0.449, height=36, width=67)
-        self.btnCalcular.configure(background="#fefda6",text='''Calcular''')
+        self.btnCalcular.configure(background="#fefda6", text='''Calcular''')
         self.btnCalcular.configure(font=("Comic Sans MS", 10, "bold"))
-        self.btnCalcular.configure(command = lambda: calcular_d(self.entry_h.get(), self.entry_rec.get(), self.entry_Asøprincipal.get(), self.entryD))
+        #self.btnCalcular.configure(command = lambda: calcular_d(self.entry_h.get(), self.entry_rec.get(), self.entry_Asøprincipal.get(), self.entryD))
+        self.btnCalcular.configure(command=lambda: self.actualizar_resultado_1(self.entry_h.get(), self.entry_rec.get(), self.entry_Asøprincipal.get()))
+
         
         self.labTitle.place(relx=0.28, rely=0.037, height=41, width=534)
         self.labTitle.configure(**title_config,text='''DETERMINACIÓN DE LA ALTURA UTIL''')
@@ -128,15 +136,16 @@ class principal:
 
         self.btnCal2 = tk.Button(self.theEc2)
         self.btnCal2.place(relx=0.472, rely=0.375, height=36, width=67)
-        self.btnCal2.configure(background="#fefda6")
-        self.btnCal2.configure(text='''Calcular''')
-        self.btnCal2.configure(command=lambda: calcular_MuenMn(self.entry_Mu.get(), self.res_Mu))
+        self.btnCal2.configure(background="#fefda6", text='''Calcular''')
+        #self.btnCal2.configure(command=lambda: calcular_MuenMn(self.entry_Mu.get(), self.res_Mu))
+        self.btnCal2.configure(command=lambda: self.actualizar_resultado_2(self.entry_Mu.get()))
+
 
         self.labTitle2 = tk.Label(self.theEc2)
         self.labTitle2.place(relx=0.207, rely=0.037, height=31, width=524)
         self.labTitle2.configure(**title_config,text='''TRANSFORMACION DEL MOMENTO ULTIMO''')
         
-        
+    
         
         #Ecuacion 3
 
@@ -257,24 +266,33 @@ class principal:
         self.entry_a.configure(**entry_config)
 
 
-        # self.optn12 = tk.Button(self.theEc3)
-        # self.optn12.place(relx=0.675, rely=0.537, height=46, width=237)
-        # self.optn12.configure(background="#fefda6", text="Calcular Acero")
-        # self.optn12.configure(command=self.mostrar_calculo_acero)
-
-        # # Etiqueta o campo para mostrar el resultado del cálculo
-        # self.resultado_acero = tk.Label(self.theEc3)
-        # self.resultado_acero.place(relx=0.675, rely=0.637, height=300, width=300)
-        # self.resultado_acero.configure(background="#f9f6f2",anchor='center', font=("Comic Sans MS", 12), text="Resultado: ")
+        self.label_resultado_1 = tk.Label(self.theEc3, text="Resultado Cálculo 1: ", **label_config)
+        self.label_resultado_1.place(relx=0.56, rely=0.40, height=21, width=250)
+        self.label_resultado_2 = tk.Label(self.theEc3, text="Resultado Cálculo 2: ", **label_config)
+        self.label_resultado_2.place(relx=0.56, rely=0.45, height=21, width=250)
+                # self.optn12 = tk.Button(self.theEc3)
 
         self.calculate_button3 = tk.Button(self.theEc3, text='Calcular Acero', command=self.mostrar_calculo_acero, background="#fefda6")
         self.calculate_button3.place(relx=0.675, rely=0.537, height=46, width=237)
         
         self.resultado_acero = tk.Label(self.theEc3, text="Resultado: ", **label_config)
-        self.resultado_acero.place(relx=0.073, rely=0.49, height=300, width=400)
-        
-        # self.title_label3 = tk.Label(self.theEc3, text='REQUIERIMIENTO DE ACERO', **title_config)
-        # self.title_label3.place(relx=0.207, rely=0.037, height=31, width=424)
+        self.resultado_acero.place(relx=0.027, rely=0.49, height=300, width=400)
+    
+    def actualizar_resultado_1(self, h, rec, Asøprincipal):
+        resultado_1 = calcular_d(h, rec, Asøprincipal, self.entryD)
+        if resultado_1 is not None:
+            self.label_resultado_1.configure(text=f"Resultado Cálculo 1: {resultado_1}")
+        else:
+            self.label_resultado_1.configure(text="Error en el cálculo")
+
+    def actualizar_resultado_2(self, Mu):
+        resultado_2 = calcular_MuenMn(Mu, self.res_Mu)
+        if resultado_2 is not None:
+            self.label_resultado_2.configure(text=f"Resultado Cálculo 2: {resultado_2}")
+        else:
+            self.label_resultado_2.configure(text="Error en el cálculo")
+
+
 
     #calculos_acero(fc, fy, Mu, ø, b, d, Vu, λ):
     def mostrar_calculo_acero(self):

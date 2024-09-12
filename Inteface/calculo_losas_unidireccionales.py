@@ -4,32 +4,39 @@ import tkinter as tk
 #ECUACIÓN
 def calcular_d(h, rec, Asøprincipal, entryD):
     try:
-        h =float(h)
-        rec =float(rec)
-        Asøprincipal =float(Asøprincipal)
+        h = float(h)
+        rec = float(rec)
+        Asøprincipal = float(Asøprincipal)
         
-        #Realizar calculo
-        d=h-rec-(Asøprincipal/2)
-        #Resultado
-        # resultado_label_d.config(text=f'd = {d:.2f}')
+        # Realizar cálculo
+        d = h - rec - (Asøprincipal / 2)
         
+        # Insertar el resultado en entryD
         entryD.insert(0, f'{d:.2f}')
+        
+        # Devolver el valor de 'd'
+        return d
     except ValueError:
         messagebox.showerror("error", "Por favor, ingrese valores válidos.")
-        
+        return None  # Devolver None en caso de error
 
 #ECUACIÓN
 def calcular_MuenMn(Mu, res_Mu):
     try:
-        Mu =float(Mu)  
-        #Realizar calculo
-        MuenMn= Mu/1000
-        #Resultado
-        # resultado_label_MuenMn.config(text=f'MuenMn = {MuenMn:.2f}')
+        Mu = float(Mu)
         
+        # Realizar cálculo
+        MuenMn = Mu / 1000
+        
+        # Insertar el resultado en res_Mu
         res_Mu.insert(0, f'{MuenMn:.2f}')
+        
+        # Devolver el valor de 'MuenMn'
+        return MuenMn
     except ValueError:
         messagebox.showerror("error", "Por favor, ingrese valores válidos.")
+        return None  # Devolver None en caso de error
+
         
 def calcular_p(fc, fy, Mu, ø, b, d, entry_p):
     try:
@@ -165,7 +172,7 @@ def calcular_ρmintemp(fy, d):
             messagebox.showinfo("Correcto", f'{ρmintemp:.5f}')
 
         except ValueError:
-            messagebox.showerror("error", "Por favor, ingrese valores válidos.")
+            messagebox.showerror("error", "Por favor, ingrese valores válidos.") 
             
 def calcular_øMn(ø, ρmin, d, a, fy, Mu=None):
         try:
@@ -223,3 +230,66 @@ def calcular_cortante(ø, λ, b, d, Vu, fc ):
             
     except ValueError:
         messagebox.showerror("error", "Por favor, ingrese valores válidos.")
+
+
+def calculos_acero(fc, fy, Mu, ø, b, d, Vu, λ):
+    # BÚSQUEDA 3. CUANTÍA O PORCENTAJE DE ACERO REQUERIDO (ρ)
+    ρ = (0.85 * fc / fy) * (1 - (1 - 2 * Mu / (ø * 0.85 * fc * b * d ** 2)) ** 0.5)
+
+    # VERIFICACIÓN. VIGA RECTANGULAR O VIGA T
+    a = ρ * fy * d / (0.85 * fc)
+
+    # VALORES β1 PARA LA DISTRIBUCIÓN DE ESFUERZO
+    if fc < 28:
+        β1 = 0.85
+    elif fc < 55:
+        β1 = 0.65
+    else:
+        β1 = 0.85 - (0.05 * (fc - 28) / 7)
+
+    # BÚSQUEDA 3.2. DISTANCIA AL EJE NEUTRO
+    c = a / β1
+
+    # BÚSQUEDA 3.3 Et A TRAVÉS DE LA RELACIÓN DE TRIÁNGULOS
+    єt = (d - c) * 0.003 / c
+
+    # BÚSQUEDA 3.4 ÁREA REQUERIDA DE ACERO
+    As = ρ * (b * 100) * (d * 100)  # en cm
+
+    # BÚSQUEDA 3.5 REFUERZO MÍNIMO A FLEXIÓN EN LOSAS NO PREESFORZADAS
+    ρmin_a = (0.0018 * 420 / fy) * 0.045
+    ρmin_b = 0.0014 * 0.045
+    ρmin = max(ρmin_a, ρmin_b)
+
+    # NÚMERO DE BARRAS
+    Nb = ρmin / 1.13
+
+    # BÚSQUEDA 3.6 REFUERZO CORRUGADO DE RETRACCIÓN Y TEMPERATURA
+    ρmintemp_a = (0.0018 * 420 / fy) * 1 * d
+    ρmintemp_b = 1.4 * 1 * d
+    ρmintemp = max(ρmintemp_a, ρmintemp_b)
+
+    # BÚSQUEDA 3.7 DETERMINACIÓN DEL MOMENTO NOMINAL
+    øMn = ø * ρmin * fy * (d - (a / 2)) * (1000 / 1)  # en Kn.m
+
+    # Verificación del momento nominal
+    cumple_momento = øMn > Mu
+
+    # VERIFICACIÓN AL CORTANTE
+    cortante_cumple = 1/2 * ø * 0.17 * λ * (fc ** 0.5) * 100 * b * d > Vu
+
+    # Retornamos todos los valores calculados en un diccionario
+    return {
+        'ρ': ρ,
+        'a': a,
+        'β1': β1,
+        'c': c,
+        'єt': єt,
+        'As': As,
+        'ρmin': ρmin,
+        'Nb': Nb,
+        'ρmintemp': ρmintemp,
+        'øMn': øMn,
+        'cumple_momento': cumple_momento,
+        'cortante_cumple': cortante_cumple
+    }
