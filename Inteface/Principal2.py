@@ -145,7 +145,7 @@ class CalculadoraLosas:
             ρ: {ρ:.4f}
             As: {As:.4f} cm²
             ρmin: {ρmin:.4f}
-            Nb: {Nb:.2f}
+            Numero de barras : {Nb:.2f}
             ρmintemp: {ρmintemp:.4f}
             øMn: {øMn:.2f} kN·m
             Verificación del momento: {momento_verificacion}
