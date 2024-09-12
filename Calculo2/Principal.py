@@ -212,43 +212,34 @@ class Principal:
             
             c = a / β1
             єt = (d - c) * 0.003 / c
-            As = ρ * (b * 100) * (d * 100)  # en cm²
+            As = ρ * b * d * 10000  # en cm²
             
-            ρmin_a = (0.0018 * 420 / fy) * 0.045
-            ρmin_b = 0.0014 * 0.045
+            ρmin_a = (0.0018 * 420 / fy)
+            ρmin_b = 0.0014
             ρmin = max(ρmin_a, ρmin_b)
             
-            Nb = ρmin / 1.13
+            Nb = As / (ρmin * b * d * 10000)  
             
-            ρmintemp_a = (0.0018 * 420 / fy) * 1 * d
-            ρmintemp_b = 1.4 * 1 * d
+            ρmintemp_a = (0.0018 * 420 / fy) * d
+            ρmintemp_b = 0.0014 * d
             ρmintemp = max(ρmintemp_a, ρmintemp_b)
             
-            øMn = ø * ρmin * fy * (d - (a / 2)) * 1000  # en kN·m
+            øMn = ø * ρ * fy * (d - (a / 2)) * b * 1000  # en kN·m
             
-            cortante = 1/2 * ø * 0.17 * λ * (fc**0.5) * 100 * b * d
+            cortante = 1/2 * ø * 0.17 * λ * (fc**0.5) * b * d * 1000  # en kN
+            
 
             # Preparar resultados
             resultados = f"""
     Resultados de los cálculos:
 
     1. Altura útil (d) = {d:.4f} m
-    2. Momento último en MN·m (Mu en Mn) = {MuenMn:.4f} MN·m
-    3. Cuantía de acero (ρ) = {ρ:.6f}
-    4. Profundidad del bloque rectangular de esfuerzos (a) = {a:.4f} m
-    5. Factor β1 = {β1:.4f}
-    6. Distancia al eje neutro (c) = {c:.4f} m
-    7. Deformación unitaria del acero (єt) = {єt:.6f}
     8. Área de acero requerida (As) = {As:.2f} cm²
-    9. Cuantía mínima (ρmin) = {ρmin:.6f}
-    10. Número de barras = {Nb:.2f}
-    11. Cuantía mínima por temperatura (ρmin temp) = {ρmintemp:.6f}
+    10. Numero de barras (Nb) = {Nb:.2f}
     12. Momento nominal (øMn) = {øMn:.2f} kN·m
-    13. Resistencia al cortante = {cortante:.2f} kN
-
     Verificaciones:
-    14. Momento: {'CUMPLE' if øMn >= Mu else 'NO CUMPLE'}
-    15. Cortante: {'No requiere estribos' if cortante >= Vu else 'Requiere estribos'}
+    13. Momento: {'CUMPLE' if øMn >= Mu else 'NO CUMPLE'}
+    14. Cortante: {'No requiere estribos' if cortante >= Vu else 'Requiere estribos'}
             """
 
             # Mostrar resultados
@@ -259,6 +250,7 @@ class Principal:
 
         except ValueError:
             messagebox.showerror("Error", "Por favor, asegúrese de ingresar valores numéricos válidos en todos los campos.")
+
 
 def main():
     root = tk.Tk()
