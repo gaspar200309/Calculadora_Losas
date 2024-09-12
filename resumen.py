@@ -12,6 +12,7 @@ Mu= 21.93 #(Kn)
 Vu= 26.36 #(Kn)
 λ= 1
 ø=0.9 # factor resistente a esfuerzo de flexion
+M = 0.099435 #
 
 #BÚSQUEDA 1. DETERMINACIÓN DE LA ALTURA UTIL
 d=h-rec-(Asøprincipal/2)
@@ -57,7 +58,8 @@ print('As=',As)
 print('ρmin=',ρmin)
 
 #NÚMERO DE BARRAS
-Nb= ρmin/1.13
+Nb= ρmin/0.79
+
 print('Nb=', Nb)
 
 #BÚSQUEDA 3.6. REFUERZO CORRUGADO DE RETRACCIÓN Y TEMPERATURA
