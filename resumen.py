@@ -22,7 +22,8 @@ print('d=',d)
 Mu=(Mu/1000)
 print('Mu=',Mu)
 
-#BÚSQUEDA 3. CUANTÍA O PORCENTAJE DE ACERO REQUERIDO (ρ)
+
+#*BÚSQUEDA 3. CUANTÍA O PORCENTAJE DE ACERO REQUERIDO (ρ)
 ρ=(0.85*fc/fy)*(1-(1-2*Mu/(ø*0.85*fc*b*d**2))**0.5)
 print('ρ=',ρ)
 
