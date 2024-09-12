@@ -218,7 +218,7 @@ class Principal:
             ρmin_b = 0.0014
             ρmin = max(ρmin_a, ρmin_b)
             
-            Nb = As / (ρmin * b * d * 10000)  
+            Nb = As / (ρmin * b * d * 10000)  # Corregido el cálculo de Nb
             
             ρmintemp_a = (0.0018 * 420 / fy) * d
             ρmintemp_b = 0.0014 * d
