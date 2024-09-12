@@ -4,32 +4,39 @@ import tkinter as tk
 #ECUACIÓN
 def calcular_d(h, rec, Asøprincipal, entryD):
     try:
-        h =float(h)
-        rec =float(rec)
-        Asøprincipal =float(Asøprincipal)
+        h = float(h)
+        rec = float(rec)
+        Asøprincipal = float(Asøprincipal)
         
-        #Realizar calculo
-        d=h-rec-(Asøprincipal/2)
-        #Resultado
-        # resultado_label_d.config(text=f'd = {d:.2f}')
+        # Realizar cálculo
+        d = h - rec - (Asøprincipal / 2)
         
+        # Insertar el resultado en entryD
         entryD.insert(0, f'{d:.2f}')
+        
+        # Devolver el valor de 'd'
+        return d
     except ValueError:
         messagebox.showerror("error", "Por favor, ingrese valores válidos.")
-        
+        return None  # Devolver None en caso de error
 
 #ECUACIÓN
 def calcular_MuenMn(Mu, res_Mu):
     try:
-        Mu =float(Mu)  
-        #Realizar calculo
-        MuenMn= Mu/1000
-        #Resultado
-        # resultado_label_MuenMn.config(text=f'MuenMn = {MuenMn:.2f}')
+        Mu = float(Mu)
         
+        # Realizar cálculo
+        MuenMn = Mu / 1000
+        
+        # Insertar el resultado en res_Mu
         res_Mu.insert(0, f'{MuenMn:.2f}')
+        
+        # Devolver el valor de 'MuenMn'
+        return MuenMn
     except ValueError:
         messagebox.showerror("error", "Por favor, ingrese valores válidos.")
+        return None  # Devolver None en caso de error
+
         
 def calcular_p(fc, fy, Mu, ø, b, d, entry_p):
     try:
