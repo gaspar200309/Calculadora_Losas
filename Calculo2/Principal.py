@@ -150,9 +150,11 @@ class Principal:
             entry.configure(**entry_config)
             self.entries[text] = entry
 
-        self.resultados_listbox = tk.Listbox(self.theEc3)
-        self.resultados_listbox.place(relx=0.05, rely=0.45, relheight=0.3, relwidth=0.9)
-        self.resultados_listbox.configure(background="white", font=("Comic Sans MS", 10))
+        self.resultados_listbox = tk.Text(self.theEc3, height=15, width=70)
+        self.resultados_listbox.place(relx=0.05, rely=0.45)
+        self.resultados_listbox.configure(font=('Helvetica', 10))
+
+
 
 
         self.btnCalcularTodo = tk.Button(self.theEc3)
@@ -226,31 +228,34 @@ class Principal:
             
             cortante = 1/2 * ø * 0.17 * λ * (fc**0.5) * 100 * b * d
 
-            # Mostrar resultados
-            self.resultados_listbox.delete(0, tk.END)
-            
+            # Preparar resultados
             resultados = f"""
-            d = {d:.4f} m
-            Mu en Mn = {MuenMn:.4f} kN·m
-            ρ = {ρ:.6f}
-            a = {a:.4f} m
-            β1 = {β1:.4f}
-            c = {c:.4f} m
-            єt = {єt:.6f}
-            As = {As:.2f} cm²
-            ρmin = {ρmin:.6f}
-            Número de barras = {Nb:.2f}
-            ρmin temperatura = {ρmintemp:.6f}
-            øMn = {øMn:.2f} kN·m
-            Cortante = {cortante:.2f} kN
-             f"Verificación del momento: {'CUMPLE' if øMn >= Mu else 'NO CUMPLE'}",
-            f"Verificación al cortante: {'cortante no requiere estribos' if cortante >= Vu else 'requiere estribos'}"
-           
+    Resultados de los cálculos:
+
+    1. Altura útil (d) = {d:.4f} m
+    2. Momento último en MN·m (Mu en Mn) = {MuenMn:.4f} MN·m
+    3. Cuantía de acero (ρ) = {ρ:.6f}
+    4. Profundidad del bloque rectangular de esfuerzos (a) = {a:.4f} m
+    5. Factor β1 = {β1:.4f}
+    6. Distancia al eje neutro (c) = {c:.4f} m
+    7. Deformación unitaria del acero (єt) = {єt:.6f}
+    8. Área de acero requerida (As) = {As:.2f} cm²
+    9. Cuantía mínima (ρmin) = {ρmin:.6f}
+    10. Número de barras = {Nb:.2f}
+    11. Cuantía mínima por temperatura (ρmin temp) = {ρmintemp:.6f}
+    12. Momento nominal (øMn) = {øMn:.2f} kN·m
+    13. Resistencia al cortante = {cortante:.2f} kN
+
+    Verificaciones:
+    14. Momento: {'CUMPLE' if øMn >= Mu else 'NO CUMPLE'}
+    15. Cortante: {'No requiere estribos' if cortante >= Vu else 'Requiere estribos'}
             """
-            for resultado in resultados:
-                self.resultados_listbox.insert(tk.END, resultado)
-                   
-            messagebox.showinfo("Resultados", resultados)
+
+            # Mostrar resultados
+            self.resultados_listbox.delete('1.0', tk.END)
+            self.resultados_listbox.insert(tk.END, resultados)
+            
+            messagebox.showinfo("Resultados de los Cálculos", resultados)
 
         except ValueError:
             messagebox.showerror("Error", "Por favor, asegúrese de ingresar valores numéricos válidos en todos los campos.")
