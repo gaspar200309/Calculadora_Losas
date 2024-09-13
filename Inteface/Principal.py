@@ -249,7 +249,9 @@ class Principal:
             ρmin_a = (0.0018 * 420 / fy)
             ρmin_b = 0.0014
             ρmin = max(ρmin_a, ρmin_b)
+            print("ρmin" + ρmin)
             
+            Nb = math.ceil(As / 1.54)
             Nb = math.ceil(As / (ρmin * b * d * 10000))  #0.79
             
             ρmintemp_a = (0.0018 * 420 / fy) * d
@@ -267,7 +269,7 @@ class Principal:
 
     1. Altura útil (d) = {d:.4f} m
     8. Área de acero requerida (As) = {As:.2f} cm²
-    10. Numero de barras (Nb) = {Nb:.2f}
+    10. Numero de barras (Nb) = {Nb:.2f} utilizando la 10mm
     12. Momento nominal (øMn) = {øMn:.2f} kN·m
     Verificaciones:
     13. Momento: {'CUMPLE' if øMn >= Mu else 'NO CUMPLE'}
@@ -333,7 +335,7 @@ class Principal:
 
             1. Altura útil (d) = {d:.4f} m
             8. Área de acero requerida (As) = {As:.2f} cm²
-            10. Numero de barras (Nb) = {Nb:.2f}
+            10. Numero de barras (Nb) = {Nb:.2f} utilizando 10mm
             12. Momento nominal (øMn) = {øMn:.2f} kN·m
             Verificaciones:
             13. Momento: {'CUMPLE' if øMn >= Mu else 'NO CUMPLE'}
@@ -357,5 +359,5 @@ def main():
     app = Principal(root)
     root.mainloop()
 
-if _name_ == '_main_':
+if __name__ == '_main_':
     main()
